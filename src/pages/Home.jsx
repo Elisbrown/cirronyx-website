@@ -4,6 +4,7 @@ import DotGrid from '../components/DotGrid/DotGrid';
 import BorderGlow from '../components/BorderGlow/BorderGlow';
 import CardSwap, { Card } from '../components/CardSwap/CardSwap';
 import MagicBento from '../components/MagicBento/MagicBento';
+import SEO from '../components/SEO/SEO';
 
 // Import data
 import servicesData from '../data/services.json';
@@ -22,6 +23,22 @@ const iconMap = {
 };
 
 function Home() {
+  const serviceSchema = {
+    "@context": "https://schema.org",
+    "@type": "ProfessionalService",
+    "name": "Cirronyx Consulting",
+    "image": "https://cirronyx.com/logo.png",
+    "url": "https://cirronyx.com",
+    "telephone": "",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Global",
+      "addressCountry": "US"
+    },
+    "serviceType": ["Cloud Consulting", "AI Implementation", "DevOps Engineering"],
+    "description": "Enterprise-grade cloud, AI, and DevOps solutions for global businesses."
+  };
+
   const stats = [
     { number: "50+", label: "Enterprise Clients" },
     { number: "15+", label: "Countries Served" },
@@ -53,6 +70,11 @@ function Home() {
 
   return (
     <main>
+      <SEO 
+        title="Home"
+        description="Transform your business with enterprise-grade cloud, AI, and DevOps solutions. Proven expertise in cloud infrastructure and modern software delivery."
+        schemaData={serviceSchema}
+      />
       {/* Hero Section with DotGrid Background */}
       <section className="pt-32 pb-20 px-4" style={{ position: 'relative', overflow: 'hidden' }}>
         {/* DotGrid Background */}

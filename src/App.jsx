@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-route
 import CardNav from './components/CardNav/CardNav';
 import Home from './pages/Home';
 import Careers from './pages/Careers';
+import SEO from './components/SEO/SEO';
 
 // Scroll to top on route change
 function ScrollToTop() {
@@ -31,9 +32,28 @@ function HandleHashScroll() {
   return null;
 }
 
+
 function App() {
+  const organizationSchema = {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "Cirronyx",
+    "url": "https://cirronyx.com",
+    "logo": "https://cirronyx.com/logo.png",
+    "description": "Enterprise Cloud, AI & DevOps Consulting",
+    "sameAs": [
+      "https://www.linkedin.com/company/cirronyx",
+      "https://twitter.com/cirronyx"
+    ]
+  };
+
   return (
     <Router>
+      <SEO 
+        description="Transform your business with proven expertise in cloud infrastructure, artificial intelligence, and modern software delivery."
+        keywords="Cloud Consulting, AI Solutions, DevOps, Google Cloud, AWS, Azure, Machine Learning, Enterprise Technology"
+        schemaData={organizationSchema}
+      />
       <ScrollToTop />
       <HandleHashScroll />
       <div className="min-h-screen bg-slate-50">

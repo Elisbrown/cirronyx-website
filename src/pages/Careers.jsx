@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { Briefcase, MapPin, Clock, ChevronDown, ChevronUp, Send, CheckCircle } from 'lucide-react';
 
+import SEO from '../components/SEO/SEO';
+
 const JobListing = ({ title, location, type, description, requirements }) => {
   const [isOpen, setIsOpen] = useState(false);
 
@@ -90,8 +92,38 @@ function Careers() {
     }
   ];
 
+  // Schema for job postings
+  const jobSchema = jobs.map(job => ({
+    "@context": "https://schema.org",
+    "@type": "JobPosting",
+    "title": job.title,
+    "description": job.description,
+    "datePosted": "2024-05-01", // Should ideally be dynamic
+    "validThrough": "2026-12-31",
+    "employmentType": "FULL_TIME",
+    "hiringOrganization": {
+      "@type": "Organization",
+      "name": "Cirronyx",
+      "sameAs": "https://cirronyx.com"
+    },
+    "jobLocation": {
+      "@type": "Place",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": job.location.includes("New York") ? "New York" : "Remote",
+        "addressRegion": job.location.includes("New York") ? "NY" : "Global",
+        "addressCountry": "US"
+      }
+    }
+  }));
+
   return (
     <div className="bg-slate-50 min-h-screen">
+      <SEO 
+        title="Careers"
+        description="Join Cirronyx and help build the future of enterprise technology. Explore open positions in Cloud Architecture, AI, and DevOps."
+        schemaData={jobSchema}
+      />
       {/* Hero Section */}
       <section className="pt-32 pb-20 px-4 bg-gradient-to-br from-slate-900 to-blue-900 text-white overflow-hidden relative">
         <div className="absolute top-0 right-0 w-1/2 h-full opacity-10">
