@@ -1,0 +1,23 @@
+[
+  {
+    "id": "testimonial-1",
+    "quote": "Cirronyx delivered a seamless cloud migration that exceeded our expectations. Their expertise in GCP and understanding of our business needs was instrumental in our digital transformation.",
+    "author": "Senior Director of Infrastructure",
+    "company": "Global Technology Company",
+    "project": "Multi-cloud migration and modernization"
+  },
+  {
+    "id": "testimonial-2",
+    "quote": "The DevOps transformation project fundamentally changed how we deliver software. The team's deep knowledge of OpenShift and GitOps practices enabled us to achieve enterprise-grade automation.",
+    "author": "VP of Engineering",
+    "company": "Fortune 500 Enterprise",
+    "project": "DevOps platform implementation"
+  },
+  {
+    "id": "testimonial-3",
+    "quote": "Their AI/ML expertise helped us unlock significant business value from our data. The MLOps platform they built is now a core competitive advantage for our organization.",
+    "author": "Chief Data Officer",
+    "company": "Leading Retailer",
+    "project": "Enterprise ML platform"
+  }
+]

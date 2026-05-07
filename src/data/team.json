@@ -1,0 +1,30 @@
+[
+  {
+    "id": "founder-cto",
+    "name": "Dr. Mbah Johnas Fortem",
+    "title": "Founder & Chief Technology Officer",
+    "photo": "/team/fortem.jpg",
+    "bio": "Technology executive and Marquise WhosWhos Listee with doctorate in Information Technology and extensive experience architecting enterprise-scale solutions. Former technical leader at Google, Microsoft, and Red Hat with a proven track record delivering complex cloud and AI projects across Fortune 500 organizations.",
+    "expertise": [
+      "Cloud Architecture",
+      "AI/ML Strategy",
+      "DevOps Transformation"
+    ],
+    "education": "Ph.D. Information Technology, M.Sc. In Artificial Intelligence, M.Sc. Strategic Management, M.Sc. Computer Networking, B.Sc in Computer Engineering",
+    "certifications": "Google Cloud Professional Architect, Google Professional DevOps, Red Hat Certified Engineer, Azure Solutions Architect, RedHat Accredited Professional & Trainer, Python Security Professional, CCNA, Blockchain"
+  },
+  {
+    "id": "Co-Founder-Head of Cyber Security",
+    "name": "Khalid M.",
+    "title": "Co-Founder-Head of Cyber Security",
+    "photo": "",
+    "bio": "Security Leader with multiple years of experience delivering projects for customers around the globe",
+    "expertise": [
+      "Microsoft Security",
+      "Security Foundation",
+      "SAP Architecture"
+    ],
+    "education": "Masters Degree Strategic Management",
+    "certifications": "SAP Data Architect, Microsoft Certified Trainer, Microsoft Certified CyberSecurity Architect"
+  }
+]

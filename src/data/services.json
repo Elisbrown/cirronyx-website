@@ -1,0 +1,92 @@
+[
+  {
+    "id": "cloud-infrastructure",
+    "icon": "Cloud",
+    "title": "Cloud Infrastructure & Migration",
+    "tagline": "Seamless transition to modern cloud platforms",
+    "description": "We architect and execute enterprise cloud migrations across GCP, AWS, and Azure, ensuring security, scalability, and minimal disruption to your operations.",
+    "offerings": [
+      "Multi-cloud strategy & architecture design",
+      "Legacy application modernization",
+      "Kubernetes and container orchestration",
+      "Zero-downtime migration planning",
+      "Hybrid and multi-cloud solutions",
+      "Cloud security & compliance"
+    ]
+  },
+  {
+    "id": "ai-ml-solutions",
+    "icon": "Brain",
+    "title": "AI & Machine Learning Solutions",
+    "tagline": "Intelligent systems that drive business value",
+    "description": "From strategy to deployment, we build AI solutions that solve real business problems. Our expertise spans Generative AI, MLOps, and custom model development.",
+    "offerings": [
+      "Generative AI integration & strategy",
+      "Custom ML model development",
+      "MLOps pipeline implementation",
+      "Natural language processing (NLP)",
+      "Computer vision solutions",
+      "AI-powered automation & analytics"
+    ]
+  },
+  {
+    "id": "devops-automation",
+    "icon": "Code",
+    "title": "DevOps & Automation",
+    "tagline": "Accelerate delivery with intelligent automation",
+    "description": "We transform software delivery with modern DevOps practices, building CI/CD pipelines that improve speed, reliability, and team productivity.",
+    "offerings": [
+      "CI/CD pipeline design & automation",
+      "Infrastructure as Code (Terraform, Ansible)",
+      "GitOps implementation",
+      "Container orchestration (K8s/OpenShift)",
+      "DevSecOps integration",
+      "Monitoring & observability"
+    ]
+  },
+  {
+    "id": "cybersecurity",
+    "icon": "Shield",
+    "title": "Cybersecurity & Compliance",
+    "tagline": "Protect your digital assets and ensure compliance",
+    "description": "Comprehensive security services that protect your infrastructure, applications, and data while meeting regulatory requirements.",
+    "offerings": [
+      "Security architecture & assessment",
+      "Secure coding practices",
+      "Privacy-first system design",
+      "IoT & edge security",
+      "Compliance automation (SOC 2, GDPR, HIPAA)",
+      "Penetration testing & vulnerability management"
+    ]
+  },
+  {
+    "id": "finops",
+    "icon": "TrendingUp",
+    "title": "FinOps & Cost Optimization",
+    "tagline": "Maximize ROI from your cloud investments",
+    "description": "Strategic cloud financial management that balances performance with cost efficiency. We help you optimize spend without sacrificing capability.",
+    "offerings": [
+      "Cloud cost analysis & optimization",
+      "FinOps framework implementation",
+      "Resource rightsizing & scheduling",
+      "Multi-cloud cost governance",
+      "Showback & chargeback models",
+      "Budget forecasting & alerting"
+    ]
+  },
+  {
+    "id": "training",
+    "icon": "GraduationCap",
+    "title": "Technical Training & Enablement",
+    "tagline": "Empower your teams with cutting-edge skills",
+    "description": "Customized training programs that upskill your teams in cloud, DevOps, AI, and security. From bootcamps to certification prep.",
+    "offerings": [
+      "DevOps & CI/CD training",
+      "Cloud platform certification prep",
+      "Generative AI workshops",
+      "Kubernetes & container training",
+      "Security best practices",
+      "Custom curriculum development"
+    ]
+  }
+]

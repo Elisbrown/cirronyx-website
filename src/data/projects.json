@@ -1,0 +1,93 @@
+[
+  {
+    "id": "ai-transformation-banking",
+    "title": "Enterprise AI Transformation - Global Investment Bank",
+    "client": "Fortune 500 Financial Institution",
+    "industry": "Financial Services",
+    "challenge": "Manual compliance processes costing $150M annually, with 60% of analyst time spent on regulatory document review. Wealth advisors spending less than 40% of time on client-facing activities.",
+    "solution": "Built enterprise AI Center of Excellence with LangChain orchestration. Deployed RAG-powered Regulatory Insights Agent for compliance and multi-agent Wealth Advisor Copilot integrating market data, CRM, and research libraries.",
+    "results": [
+      "$45M annual cost reduction in compliance operations",
+      "65% decrease in manual document review time",
+      "12% increase in assets under management (AUM)",
+      "90% reduction in policy gaps, significantly lowering risk",
+      "Advisors now spending 70%+ time on client interaction"
+    ],
+    "technologies": ["LangChain", "AWS", "Vector Database", "RAG", "Multi-Agent Systems", "NLP"]
+  },
+  {
+    "id": "telecom-azure-migration",
+    "title": "Multi-Region Cloud Migration - Telecom Provider",
+    "client": "Giant European Telecom Provider",
+    "industry": "Telecommunications",
+    "challenge": "Migrate critical infrastructure from multiple on-premise data centers to Azure Cloud while ensuring zero service disruption",
+    "solution": "Designed and executed phased migration strategy with hybrid cloud architecture, automated failover mechanisms, and comprehensive security baseline implementation",
+    "results": [
+      "Zero downtime during migration",
+      "40% reduction in infrastructure costs",
+      "Improved disaster recovery capabilities",
+      "Enhanced scalability for future growth"
+    ],
+    "technologies": ["Azure", "Hybrid Cloud", "Infrastructure as Code", "Site Reliability Engineering"]
+  },
+  {
+    "id": "openshift-swiss-financial",
+    "title": "OpenShift Platform Deployment - Swiss Financial Services",
+    "client": "Generali Switzerland & Basel Bank",
+    "industry": "Insurance & Banking",
+    "challenge": "Migrate locally-running OpenShift clusters to cloud, establish production-grade container platforms, and upskill internal teams",
+    "solution": "Migrated OpenShift clusters to Google Cloud, established multi-cluster production environments, and delivered comprehensive DevOps training programs for technical staff",
+    "results": [
+      "Successful cloud-native platform deployment",
+      "100+ employees trained on OpenShift & DevOps",
+      "Production workloads migrated with zero incidents",
+      "Established foundation for continuous delivery"
+    ],
+    "technologies": ["OpenShift", "Google Cloud", "Kubernetes", "GitOps", "CI/CD"]
+  },
+  {
+    "id": "gaming-aws-migration",
+    "title": "Gaming Infrastructure Migration - AWS",
+    "client": "Large Online Gaming Provider",
+    "industry": "Gaming & Entertainment",
+    "challenge": "Migrate self-hosted applications from multiple data centers to AWS while maintaining sub-50ms latency for global users",
+    "solution": "Designed multi-region AWS architecture with edge computing, implemented auto-scaling infrastructure, and established DevOps pipelines for rapid deployment",
+    "results": [
+      "Achieved global <50ms latency targets",
+      "60% cost optimization through right-sizing",
+      "Deployment time reduced from days to minutes",
+      "Enhanced DDoS protection and security"
+    ],
+    "technologies": ["AWS", "EC2", "CloudFront", "Auto Scaling", "Load Balancing", "Terraform"]
+  },
+  {
+    "id": "retail-windows-migration",
+    "title": "Enterprise Windows Server Migration - Retail",
+    "client": "ATlant Electronics Ukraine",
+    "industry": "Retail",
+    "challenge": "Mass migration from Windows Server 2003 to Windows Server 2008R2/2016 across distributed retail operations",
+    "solution": "Designed staged migration approach with minimal business disruption, automated deployment processes, and comprehensive testing protocols",
+    "results": [
+      "200+ servers successfully migrated",
+      "Zero data loss during migration",
+      "Enhanced security and compliance posture",
+      "Improved system performance and reliability"
+    ],
+    "technologies": ["Windows Server", "Active Directory", "PowerShell", "Migration Tools"]
+  },
+  {
+    "id": "cloud-foundations-multiple",
+    "title": "Enterprise Cloud Foundations - Multiple Organizations",
+    "client": "US & European Enterprises",
+    "industry": "Multiple Sectors",
+    "challenge": "Establish secure, compliant cloud foundations for organizations migrating to Google Cloud",
+    "solution": "Designed and implemented landing zones, security baselines, IAM frameworks, and governance models aligned with enterprise requirements and regulatory compliance",
+    "results": [
+      "10+ organizations successfully onboarded",
+      "Security baseline established for all workloads",
+      "Automated compliance monitoring implemented",
+      "Foundation for scalable cloud adoption"
+    ],
+    "technologies": ["Google Cloud", "Security Command Center", "IAM", "VPC", "Cloud Foundation Toolkit"]
+  }
+]
