@@ -1,8 +1,14 @@
 import React, { useEffect } from 'react';
-import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, useLocation, Link } from 'react-router-dom';
 import CardNav from './components/CardNav/CardNav';
 import Home from './pages/Home';
 import Careers from './pages/Careers';
+import About from './pages/About';
+import Team from './pages/Team';
+import Services from './pages/Services';
+import Contact from './pages/Contact';
+import Blog from './pages/Blog';
+import HowWeWork from './pages/HowWeWork';
 import SEO from './components/SEO/SEO';
 
 // Scroll to top on route change
@@ -67,9 +73,9 @@ function App() {
               bgColor: '#004058',
               textColor: '#fff',
               links: [
-                { label: 'Services', href: '#services', ariaLabel: 'Our Services' },
-                { label: 'Portfolio', href: '#portfolio', ariaLabel: 'Success Stories' },
-                { label: 'How We Work', href: '#engagement', ariaLabel: 'Engagement Model' },
+                { label: 'Services', href: '/services', ariaLabel: 'Our Services' },
+                { label: 'Portfolio', href: '/#portfolio', ariaLabel: 'Success Stories' },
+                { label: 'How We Work', href: '/how-we-work', ariaLabel: 'Engagement Model' },
               ],
             },
             {
@@ -77,8 +83,8 @@ function App() {
               bgColor: '#002D3E',
               textColor: '#fff',
               links: [
-                { label: 'About', href: '#about', ariaLabel: 'About Cirronyx' },
-                { label: 'Team', href: '#team', ariaLabel: 'Leadership Team' },
+                { label: 'About', href: '/about', ariaLabel: 'About Cirronyx' },
+                { label: 'Team', href: '/team', ariaLabel: 'Leadership Team' },
                 { label: 'Careers', href: '/careers', ariaLabel: 'Career Opportunities' },
               ],
             },
@@ -87,9 +93,9 @@ function App() {
               bgColor: '#004058',
               textColor: '#fff',
               links: [
-                { label: 'Blog', href: '#blog', ariaLabel: 'Blog & Articles' },
-                { label: 'Thought Leadership', href: '#thought-leadership', ariaLabel: 'Thought Leadership' },
-                { label: 'Contact', href: '#contact', ariaLabel: 'Get in Touch' },
+                { label: 'Blog', href: '/blog', ariaLabel: 'Blog & Articles' },
+                { label: 'Thought Leadership', href: '/about#thought-leadership', ariaLabel: 'Thought Leadership' },
+                { label: 'Contact', href: '/contact', ariaLabel: 'Get in Touch' },
               ],
             },
           ]}
@@ -98,13 +104,19 @@ function App() {
           buttonBgColor="#006890"
           buttonTextColor="#fff"
           ctaLabel="Get Started"
-          ctaHref="#contact"
+          ctaHref="/contact"
           ease="power3.out"
         />
 
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/careers" element={<Careers />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/team" element={<Team />} />
+          <Route path="/services" element={<Services />} />
+          <Route path="/contact" element={<Contact />} />
+          <Route path="/blog" element={<Blog />} />
+          <Route path="/how-we-work" element={<HowWeWork />} />
         </Routes>
 
         {/* Footer */}
@@ -123,23 +135,20 @@ function App() {
               <div>
                 <h4 className="font-semibold text-white mb-3">Services</h4>
                 <ul className="space-y-2 text-sm">
-                  <li><a href="/#services" className="hover:text-white transition">Cloud Migration</a></li>
-                  <li><a href="/#services" className="hover:text-white transition">AI/ML Solutions</a></li>
-                  <li><a href="/#services" className="hover:text-white transition">DevOps</a></li>
-                  <li><a href="/#services" className="hover:text-white transition">Cybersecurity</a></li>
+                  <li><Link to="/services" className="hover:text-white transition">Cloud Migration</Link></li>
+                  <li><Link to="/services" className="hover:text-white transition">AI/ML Solutions</Link></li>
+                  <li><Link to="/services" className="hover:text-white transition">DevOps</Link></li>
+                  <li><Link to="/services" className="hover:text-white transition">Cybersecurity</Link></li>
                 </ul>
               </div>
               <div>
                 <h4 className="font-semibold text-white mb-3">Company</h4>
                 <ul className="space-y-2 text-sm">
-                  <li><a href="/#about" className="hover:text-white transition">About Us</a></li>
-                  <li><a href="/#portfolio" className="hover:text-white transition">Portfolio</a></li>
-                  <li><a href="/#team" className="hover:text-white transition">Team</a></li>
-                  <li><a href="/careers" className="hover:text-white transition">Careers</a></li>
-                  <li><a href="/#engagement" className="hover:text-white transition">How We Work</a></li>
-                  <li><a href="/#blog" className="hover:text-white transition">Blog</a></li>
-                  <li><a href="/#thought-leadership" className="hover:text-white transition">Thought Leadership</a></li>
-                  <li><a href="/#contact" className="hover:text-white transition">Contact</a></li>
+                  <li><Link to="/about" className="hover:text-white transition">About Us</Link></li>
+                  <li><Link to="/team" className="hover:text-white transition">Team</Link></li>
+                  <li><Link to="/careers" className="hover:text-white transition">Careers</Link></li>
+                  <li><Link to="/blog" className="hover:text-white transition">Blog</Link></li>
+                  <li><Link to="/contact" className="hover:text-white transition">Contact</Link></li>
                 </ul>
               </div>
             </div>

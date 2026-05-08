@@ -1,11 +1,14 @@
 [
   {
     "id": "ai-transformation-banking",
-    "title": "Enterprise AI Transformation - Global Investment Bank",
+    "title": "Enterprise AI Transformation",
     "client": "Fortune 500 Financial Institution",
     "industry": "Financial Services",
+    "date": "2025 - Present",
+    "image": "",
     "challenge": "Manual compliance processes costing $150M annually, with 60% of analyst time spent on regulatory document review. Wealth advisors spending less than 40% of time on client-facing activities.",
     "solution": "Built enterprise AI Center of Excellence with LangChain orchestration. Deployed RAG-powered Regulatory Insights Agent for compliance and multi-agent Wealth Advisor Copilot integrating market data, CRM, and research libraries.",
+    "description": "Built an enterprise AI Center of Excellence for a global investment bank, deploying RAG-powered compliance agents and multi-agent wealth advisory copilots that reduced costs by $45M annually.",
     "results": [
       "$45M annual cost reduction in compliance operations",
       "65% decrease in manual document review time",
@@ -17,11 +20,14 @@
   },
   {
     "id": "telecom-azure-migration",
-    "title": "Multi-Region Cloud Migration - Telecom Provider",
+    "title": "Multi-Region Cloud Migration",
     "client": "Giant European Telecom Provider",
     "industry": "Telecommunications",
+    "date": "2024 - 2025",
+    "image": "",
     "challenge": "Migrate critical infrastructure from multiple on-premise data centers to Azure Cloud while ensuring zero service disruption",
     "solution": "Designed and executed phased migration strategy with hybrid cloud architecture, automated failover mechanisms, and comprehensive security baseline implementation",
+    "description": "Designed and executed a phased migration strategy for a major European telecom provider, moving critical infrastructure to Azure with zero downtime and 40% cost reduction.",
     "results": [
       "Zero downtime during migration",
       "40% reduction in infrastructure costs",
@@ -32,11 +38,14 @@
   },
   {
     "id": "openshift-swiss-financial",
-    "title": "OpenShift Platform Deployment - Swiss Financial Services",
+    "title": "OpenShift Platform Deployment",
     "client": "Generali Switzerland & Basel Bank",
     "industry": "Insurance & Banking",
+    "date": "2023 - 2024",
+    "image": "",
     "challenge": "Migrate locally-running OpenShift clusters to cloud, establish production-grade container platforms, and upskill internal teams",
     "solution": "Migrated OpenShift clusters to Google Cloud, established multi-cluster production environments, and delivered comprehensive DevOps training programs for technical staff",
+    "description": "Migrated OpenShift clusters to Google Cloud for Swiss financial institutions, establishing multi-cluster production environments and training 100+ employees on DevOps practices.",
     "results": [
       "Successful cloud-native platform deployment",
       "100+ employees trained on OpenShift & DevOps",
@@ -47,11 +56,14 @@
   },
   {
     "id": "gaming-aws-migration",
-    "title": "Gaming Infrastructure Migration - AWS",
+    "title": "Gaming Infrastructure Migration",
     "client": "Large Online Gaming Provider",
     "industry": "Gaming & Entertainment",
+    "date": "2023 - 2024",
+    "image": "",
     "challenge": "Migrate self-hosted applications from multiple data centers to AWS while maintaining sub-50ms latency for global users",
     "solution": "Designed multi-region AWS architecture with edge computing, implemented auto-scaling infrastructure, and established DevOps pipelines for rapid deployment",
+    "description": "Architected a multi-region AWS infrastructure for a global gaming platform, achieving sub-50ms latency worldwide with 60% cost optimization through intelligent right-sizing.",
     "results": [
       "Achieved global <50ms latency targets",
       "60% cost optimization through right-sizing",
@@ -62,11 +74,14 @@
   },
   {
     "id": "retail-windows-migration",
-    "title": "Enterprise Windows Server Migration - Retail",
+    "title": "Enterprise Server Migration",
     "client": "ATlant Electronics Ukraine",
     "industry": "Retail",
+    "date": "2022 - 2023",
+    "image": "",
     "challenge": "Mass migration from Windows Server 2003 to Windows Server 2008R2/2016 across distributed retail operations",
     "solution": "Designed staged migration approach with minimal business disruption, automated deployment processes, and comprehensive testing protocols",
+    "description": "Executed a large-scale migration of 200+ servers across distributed retail operations with zero data loss, enhancing security and compliance posture.",
     "results": [
       "200+ servers successfully migrated",
       "Zero data loss during migration",
@@ -77,11 +92,14 @@
   },
   {
     "id": "cloud-foundations-multiple",
-    "title": "Enterprise Cloud Foundations - Multiple Organizations",
+    "title": "Enterprise Cloud Foundations",
     "client": "US & European Enterprises",
     "industry": "Multiple Sectors",
+    "date": "2021 - Present",
+    "image": "",
     "challenge": "Establish secure, compliant cloud foundations for organizations migrating to Google Cloud",
     "solution": "Designed and implemented landing zones, security baselines, IAM frameworks, and governance models aligned with enterprise requirements and regulatory compliance",
+    "description": "Designed and implemented secure cloud foundations for 10+ organizations across the US and Europe, establishing landing zones, security baselines, and governance models on Google Cloud.",
     "results": [
       "10+ organizations successfully onboarded",
       "Security baseline established for all workloads",

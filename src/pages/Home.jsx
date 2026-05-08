@@ -1,9 +1,11 @@
-import React from 'react';
-import { Cloud, Brain, Code, Shield, GraduationCap, TrendingUp, CheckCircle, Award, Globe, Mail, Users, Building, Zap, Target } from 'lucide-react';
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
+import { Cloud, Brain, Code, Shield, GraduationCap, TrendingUp, CheckCircle, Award, Globe, Mail, Users, Building, Zap, Target, Linkedin } from 'lucide-react';
 import DotGrid from '../components/DotGrid/DotGrid';
 import BorderGlow from '../components/BorderGlow/BorderGlow';
 import CardSwap, { Card } from '../components/CardSwap/CardSwap';
 import MagicBento from '../components/MagicBento/MagicBento';
+import ServiceModal from '../components/ServiceModal/ServiceModal';
 import SEO from '../components/SEO/SEO';
 
 // Import data
@@ -23,6 +25,11 @@ const iconMap = {
 };
 
 function Home() {
+  const [selectedServiceIndex, setSelectedServiceIndex] = useState(null);
+  const selectedService = selectedServiceIndex !== null ? servicesData[selectedServiceIndex] : null;
+  const SelectedIcon = selectedService ? iconMap[selectedService.icon] : null;
+  const serviceColors = ['#004058', '#006890', '#2E94AE', '#002D3E', '#004058', '#006890'];
+
   const serviceSchema = {
     "@context": "https://schema.org",
     "@type": "ProfessionalService",
@@ -51,21 +58,6 @@ function Home() {
     { name: "Global Technology Leaders", sector: "Cloud & Software" },
     { name: "Financial Services", sector: "Banking & Insurance" },
     { name: "Automotive Industry", sector: "Manufacturing & Digital" }
-  ];
-
-  const certifications = [
-    { name: "Google Cloud Professional Architect", issuer: "Google Cloud", year: "2021" },
-    { name: "Google Cloud DevOps Engineer", issuer: "Google Cloud", year: "2023" },
-    { name: "Red Hat Accredited Professional - OpenShift", issuer: "Red Hat", year: "2018" },
-    { name: "Red Hat Certified Engineer (RHCE)", issuer: "Red Hat", year: "2018" },
-    { name: "Red Hat Certified System Administrator", issuer: "Red Hat", year: "2018" },
-    { name: "MCSA: Cloud Platform", issuer: "Microsoft", year: "2017" },
-    { name: "Azure Solutions Architect", issuer: "Microsoft", year: "2017" },
-    { name: "MIT Blockchain Technologies", issuer: "MIT Sloan", year: "2022" },
-    { name: "SAP Data Architect", issuer: "SAP", year: "2025" },
-    { name: "Microsoft Certified Trainer", issuer: "Microsoft", year: "2023" },
-    { name: "Microsoft Certified Cyber Security Architect", issuer: "Microsoft", year: "2026" },
-    { name: "AWS Certified Solution Architect", issuer: "AWS", year: "2023" }
   ];
 
   return (
@@ -194,16 +186,16 @@ function Home() {
             <MagicBento 
               cards={servicesData.map((service, index) => {
                 const Icon = iconMap[service.icon];
-                const colors = ['#004058', '#006890', '#2E94AE', '#002D3E', '#004058', '#006890'];
                 return {
                   title: service.title,
                   description: service.description,
                   label: service.tagline,
-                  color: colors[index % colors.length],
+                  color: serviceColors[index % serviceColors.length],
                   iconNode: <Icon className="w-6 h-6 text-cyan-400" />
                 };
               })}
-              glowColor="46, 148, 174" 
+              glowColor="46, 148, 174"
+              onCardClick={(index) => setSelectedServiceIndex(index)}
             />
           </div>
         </div>
@@ -267,118 +259,228 @@ function Home() {
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
             <h2 className="text-4xl font-bold text-slate-900 mb-4">Success Stories</h2>
-            <p className="text-xl text-slate-600">
+            <p className="text-xl text-slate-600 max-w-2xl mx-auto">
               Real results from enterprise engagements across industries
             </p>
           </div>
           
-          <div className="space-y-8">
-            {projectsData.map((study, idx) => (
-              <div key={study.id} className="bg-white rounded-2xl shadow-lg p-8 border border-slate-200">
-                <div className="grid md:grid-cols-3 gap-8">
-                  <div className="md:col-span-2">
-                    <div className="flex items-start justify-between mb-4">
-                      <div>
-                        <h3 className="text-2xl font-bold text-slate-900 mb-2">{study.title}</h3>
-                        <div className="flex gap-4 text-sm text-slate-600">
-                          <span className="flex items-center gap-1">
-                            <Building className="w-4 h-4" />
-                            {study.industry}
-                          </span>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
+            {projectsData.map((study, idx) => {
+              const gradients = [
+                'linear-gradient(135deg, #004058 0%, #006890 50%, #2E94AE 100%)',
+                'linear-gradient(135deg, #002D3E 0%, #004058 50%, #006890 100%)',
+                'linear-gradient(135deg, #006890 0%, #2E94AE 50%, #5CB8CE 100%)',
+                'linear-gradient(135deg, #0f172a 0%, #1e3a5f 50%, #004058 100%)',
+                'linear-gradient(135deg, #2E94AE 0%, #006890 50%, #004058 100%)',
+                'linear-gradient(135deg, #004058 0%, #002D3E 50%, #0f172a 100%)'
+              ];
+
+              return (
+                <div
+                  key={study.id}
+                  className="bg-white rounded-2xl shadow-lg border border-slate-100 overflow-hidden hover:shadow-2xl transition-all duration-500 group"
+                >
+                  {/* Image / Preview Area */}
+                  <div className="relative overflow-hidden">
+                    {study.image ? (
+                      <img
+                        src={study.image}
+                        alt={study.title}
+                        className="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-700"
+                      />
+                    ) : (
+                      <div
+                        className="w-full h-64 flex items-center justify-center relative group-hover:scale-105 transition-transform duration-700"
+                        style={{ background: gradients[idx % gradients.length] }}
+                      >
+                        {/* Decorative elements */}
+                        <div className="absolute inset-0 opacity-20">
+                          <div className="absolute top-6 left-6 w-20 h-20 border border-white/30 rounded-xl"></div>
+                          <div className="absolute bottom-8 right-8 w-32 h-32 border border-white/20 rounded-full"></div>
+                          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-40 h-1 bg-white/20 rounded-full"></div>
+                        </div>
+                        <div className="relative z-10 text-center px-8">
+                          <div className="w-14 h-14 bg-white/10 backdrop-blur-md rounded-xl flex items-center justify-center mx-auto mb-3 border border-white/20">
+                            <Building className="w-7 h-7 text-white/80" />
+                          </div>
+                          <div className="text-white/90 text-sm font-medium">{study.client}</div>
                         </div>
                       </div>
-                    </div>
-                    
-                    <div className="space-y-4">
-                      <div>
-                        <h4 className="font-semibold text-slate-800 mb-2">Challenge</h4>
-                        <p className="text-slate-600">{study.challenge}</p>
-                      </div>
-                      <div>
-                        <h4 className="font-semibold text-slate-800 mb-2">Solution</h4>
-                        <p className="text-slate-600">{study.solution}</p>
-                      </div>
+                    )}
+
+                    {/* Industry Badge — overlaid on image */}
+                    <div className="absolute top-4 right-4 flex gap-2">
+                      <span className="bg-white/90 backdrop-blur-md text-slate-800 px-3 py-1.5 rounded-full text-xs font-semibold shadow-sm flex items-center gap-1.5">
+                        <Building className="w-3 h-3" />
+                        {study.industry}
+                      </span>
                     </div>
                   </div>
-                  
-                  <div>
-                    <h4 className="font-semibold text-slate-800 mb-3">Key Results</h4>
-                    <ul className="space-y-2 mb-6">
-                      {study.results.map((result, i) => (
-                        <li key={i} className="flex items-start gap-2 text-sm text-slate-600">
-                          <CheckCircle className="w-4 h-4 text-green-500 mt-0.5 flex-shrink-0" />
-                          <span>{result}</span>
-                        </li>
-                      ))}
-                    </ul>
-                    
-                    <div>
-                      <h4 className="font-semibold text-slate-800 mb-2 text-sm">Technologies</h4>
-                      <div className="flex flex-wrap gap-2">
-                        {study.technologies.map((tech, i) => (
-                          <span key={i} className="bg-blue-100 text-blue-700 px-3 py-1 rounded-full text-xs font-medium">
-                            {tech}
-                          </span>
-                        ))}
+
+                  {/* Content */}
+                  <div className="p-7">
+                    {/* Title row with arrow */}
+                    <div className="flex items-start justify-between mb-1">
+                      <h3 className="text-xl font-bold text-slate-900 leading-snug pr-4 group-hover:text-blue-700 transition-colors">{study.title}</h3>
+                      <div className="w-8 h-8 rounded-full border border-slate-200 flex items-center justify-center flex-shrink-0 mt-0.5 group-hover:border-blue-400 group-hover:bg-blue-50 transition-all">
+                        <svg className="w-3.5 h-3.5 text-slate-400 group-hover:text-blue-600 transition-colors" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                          <line x1="7" y1="17" x2="17" y2="7" />
+                          <polyline points="7 7 17 7 17 17" />
+                        </svg>
                       </div>
+                    </div>
+
+                    {/* Date */}
+                    <div className="text-sm text-slate-500 mb-4">{study.date}</div>
+
+                    {/* Description */}
+                    <p className="text-slate-600 text-sm leading-relaxed mb-5">{study.description}</p>
+
+                    {/* Tech Tags */}
+                    <div className="flex flex-wrap gap-2">
+                      {study.technologies.map((tech, i) => (
+                        <span key={i} className="bg-slate-100 text-slate-700 px-3 py-1 rounded-full text-xs font-medium border border-slate-200 hover:bg-blue-50 hover:text-blue-700 hover:border-blue-200 transition-colors cursor-default">
+                          {tech}
+                        </span>
+                      ))}
                     </div>
                   </div>
                 </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </div>
       </section>
 
       {/* Testimonials */}
-      <section className="py-20 px-4 bg-slate-50">
-        <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-slate-900 mb-4">Client Testimonials</h2>
-            <p className="text-xl text-slate-600">
-              What enterprise leaders say about working with Cirronyx
-            </p>
-          </div>
-          
-          <div className="grid md:grid-cols-3 gap-8">
-            {testimonialsData.map((testimonial) => (
-              <div key={testimonial.id} className="bg-white rounded-xl p-8 shadow-md">
-                <div className="text-4xl text-blue-600 mb-4">"</div>
-                <p className="text-slate-600 mb-6 italic leading-relaxed">
-                  {testimonial.quote}
-                </p>
-                <div className="border-t border-slate-200 pt-4">
-                  <div className="font-semibold text-slate-900">{testimonial.author}</div>
-                  <div className="text-sm text-slate-600">{testimonial.company}</div>
-                  <div className="text-xs text-slate-500 mt-2">{testimonial.project}</div>
+      <section className="py-12 bg-gray-50 sm:py-16 lg:py-20">
+        <div className="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
+          <div className="flex flex-col items-center">
+            <div className="text-center">
+              <p className="text-lg font-medium text-gray-600 font-pj">Trusted by global enterprise leaders</p>
+              <h2 className="mt-4 text-3xl font-bold text-gray-900 sm:text-4xl xl:text-5xl font-pj">What our happy clients say</h2>
+            </div>
+
+            <div className="mt-8 text-center md:mt-16 md:order-3">
+              <a href="#portfolio" className="pb-2 text-base font-bold leading-7 text-gray-900 transition-all duration-200 border-b-2 border-gray-900 hover:border-gray-600 font-pj focus:outline-none focus:ring-1 focus:ring-gray-900 focus:ring-offset-2 hover:text-gray-600"> Check all success stories </a>
+            </div>
+
+            <div className="relative mt-10 md:mt-24 md:order-2 w-full">
+              <div className="absolute -inset-x-1 inset-y-16 md:-inset-x-2 md:-inset-y-6">
+                <div className="w-full h-full max-w-5xl mx-auto rounded-3xl opacity-30 blur-lg filter" style={{ background: 'linear-gradient(90deg, #44ff9a -0.55%, #44b0ff 22.86%, #8b44ff 48.36%, #ff6644 73.33%, #ebff70 99.34%)' }}></div>
+              </div>
+
+              <div className="relative grid max-w-lg grid-cols-1 gap-6 mx-auto md:max-w-none lg:gap-10 md:grid-cols-3">
+                <div className="flex flex-col overflow-hidden shadow-xl rounded-2xl">
+                  <div className="flex flex-col justify-between flex-1 p-6 bg-white lg:py-8 lg:px-7">
+                    <div className="flex-1">
+                      <div className="flex items-center">
+                        {[...Array(5)].map((_, i) => (
+                          <svg key={i} className="w-5 h-5 text-[#FDB241]" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                          </svg>
+                        ))}
+                      </div>
+
+                      <blockquote className="flex-1 mt-8">
+                        <p className="text-lg leading-relaxed text-gray-900 font-pj">“Working alongside Cirronyx's DevOps team was a breeze. Their CI/CD pipeline automation made deploying our frontend apps incredibly fast and error-free.”</p>
+                      </blockquote>
+                    </div>
+
+                    <div className="flex items-center mt-8">
+                      <img className="flex-shrink-0 object-cover rounded-full w-11 h-11" src="https://cdn.rareblocks.xyz/collection/clarity/images/testimonial/4/avatar-male-1.png" alt="" />
+                      <div className="ml-4">
+                        <p className="text-base font-bold text-gray-900 font-pj">Dan M.</p>
+                        <p className="mt-0.5 text-sm font-pj text-gray-600">Freelance React Developer</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="flex flex-col overflow-hidden shadow-xl rounded-2xl">
+                  <div className="flex flex-col justify-between flex-1 p-6 bg-white lg:py-8 lg:px-7">
+                    <div className="flex-1">
+                      <div className="flex items-center">
+                        {[...Array(5)].map((_, i) => (
+                          <svg key={i} className="w-5 h-5 text-[#FDB241]" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                          </svg>
+                        ))}
+                      </div>
+
+                      <blockquote className="flex-1 mt-8">
+                        <p className="text-lg leading-relaxed text-gray-900 font-pj">“Cirronyx's data analytics and AI tools gave our marketing team actionable insights we never had before. We've seen a huge boost in campaign ROI.”</p>
+                      </blockquote>
+                    </div>
+
+                    <div className="flex items-center mt-8">
+                      <img className="flex-shrink-0 object-cover rounded-full w-11 h-11" src="https://cdn.rareblocks.xyz/collection/clarity/images/testimonial/4/avatar-male-2.png" alt="" />
+                      <div className="ml-4">
+                        <p className="text-base font-bold text-gray-900 font-pj">James O.</p>
+                        <p className="mt-0.5 text-sm font-pj text-gray-600">Digital Marketer</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="flex flex-col overflow-hidden shadow-xl rounded-2xl">
+                  <div className="flex flex-col justify-between flex-1 p-6 bg-white lg:py-8 lg:px-7">
+                    <div className="flex-1">
+                      <div className="flex items-center">
+                        {[...Array(5)].map((_, i) => (
+                          <svg key={i} className="w-5 h-5 text-[#FDB241]" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                          </svg>
+                        ))}
+                      </div>
+
+                      <blockquote className="flex-1 mt-8">
+                        <p className="text-lg leading-relaxed text-gray-900 font-pj">“The cloud storage solutions Cirronyx implemented allowed our design team to collaborate on massive files seamlessly without any latency issues.”</p>
+                      </blockquote>
+                    </div>
+
+                    <div className="flex items-center mt-8">
+                      <img className="flex-shrink-0 object-cover rounded-full w-11 h-11" src="https://cdn.rareblocks.xyz/collection/clarity/images/testimonial/4/avatar-female.png" alt="" />
+                      <div className="ml-4">
+                        <p className="text-base font-bold text-gray-900 font-pj">Elena C.</p>
+                        <p className="mt-0.5 text-sm font-pj text-gray-600">Graphic Designer</p>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
-            ))}
+            </div>
           </div>
         </div>
       </section>
 
-      {/* Certifications */}
-      <section className="py-20 px-4 bg-white">
-        <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-slate-900 mb-4">Certifications & Credentials</h2>
-            <p className="text-xl text-slate-600">
-              Industry-recognized expertise from leading technology organizations
-            </p>
-          </div>
-          
-          <div className="grid md:grid-cols-4 gap-6">
-            {certifications.map((cert, idx) => (
-              <div key={idx} className="bg-gradient-to-br from-slate-50 to-white border border-slate-200 rounded-xl p-6 text-center hover:shadow-lg transition">
-                <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <Award className="w-8 h-8 text-blue-600" />
-                </div>
-                <h3 className="font-semibold text-slate-900 mb-2 text-sm">{cert.name}</h3>
-                <div className="text-xs text-slate-600 mb-1">{cert.issuer}</div>
-                <div className="text-xs text-slate-500">{cert.year}</div>
-              </div>
-            ))}
+      {/* Call to Action */}
+      <section className="py-24 px-4 relative overflow-hidden">
+        {/* Background Gradients */}
+        <div className="absolute inset-0 bg-gradient-to-br from-[#004058] via-[#006890] to-[#2E94AE] z-0"></div>
+        <div className="absolute inset-0 opacity-20 bg-[radial-gradient(circle_at_top_right,_var(--tw-gradient-stops))] from-cyan-300 via-transparent to-transparent z-0"></div>
+        <div className="absolute -bottom-24 -left-24 w-96 h-96 bg-blue-500 rounded-full mix-blend-multiply filter blur-3xl opacity-30 z-0"></div>
+
+        <div className="max-w-4xl mx-auto text-center relative z-10">
+          <h2 className="text-4xl md:text-5xl font-bold text-white mb-6 leading-tight">
+            Ready to Transform Your Business?
+          </h2>
+          <p className="text-xl text-blue-100 mb-10 max-w-2xl mx-auto leading-relaxed">
+            Partner with Cirronyx to accelerate your digital journey with enterprise-grade cloud infrastructure, artificial intelligence, and modern software delivery.
+          </p>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <Link 
+              to="/contact" 
+              className="bg-white text-[#004058] px-8 py-3 rounded-full font-bold text-lg hover:bg-blue-50 hover:shadow-xl hover:-translate-y-1 transition-all duration-300"
+            >
+              Contact Us Today
+            </Link>
+            <Link 
+              to="/services" 
+              className="border-2 border-white text-white px-8 py-3 rounded-full font-bold text-lg hover:bg-white/10 hover:shadow-xl hover:-translate-y-1 transition-all duration-300"
+            >
+              Explore Our Services
+            </Link>
           </div>
         </div>
       </section>
@@ -395,57 +497,65 @@ function Home() {
           
           <div className="grid md:grid-cols-2 gap-8">
             {teamData.map((leader) => (
-              <div key={leader.id} className="bg-white rounded-2xl shadow-xl p-8 hover:shadow-2xl transition-shadow">
-                {/* Photo Section */}
-                <div className="mb-6">
+              <div key={leader.id} className="group bg-white rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300 flex flex-col md:flex-row overflow-hidden h-full border border-slate-100">
+                {/* Media Section */}
+                <div className="md:w-2/5 relative overflow-hidden bg-slate-100 min-h-[250px] md:min-h-full">
                   {leader.photo ? (
                     <img 
                       src={leader.photo} 
                       alt={leader.name}
-                      className="w-32 h-32 rounded-xl object-cover mx-auto shadow-lg"
+                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                       onError={(e) => {
                         e.target.style.display = 'none';
                         e.target.nextSibling.style.display = 'flex';
                       }}
                     />
                   ) : null}
+                  {/* Fallback for missing photo */}
                   <div 
-                    className="w-32 h-32 bg-blue-600 rounded-xl flex items-center justify-center mx-auto shadow-lg"
+                    className="w-full h-full bg-gradient-to-br from-[#004058] to-[#2E94AE] flex items-center justify-center transition-transform duration-700 group-hover:scale-105"
                     style={{ display: leader.photo ? 'none' : 'flex' }}
                   >
-                    <Users className="w-16 h-16 text-white" />
+                    <div className="text-center p-6">
+                      <Users className="w-16 h-16 text-white/50 mx-auto mb-4" />
+                      <div className="text-white/80 font-medium text-sm tracking-widest uppercase">Cirronyx Leadership</div>
+                    </div>
                   </div>
                 </div>
 
                 {/* Content Section */}
-                <div className="text-center mb-6">
-                  <h3 className="text-2xl font-bold text-slate-900 mb-1">{leader.name}</h3>
-                  <div className="text-blue-600 font-medium mb-4">{leader.title}</div>
-                  <p className="text-slate-600 leading-relaxed text-sm">
+                <div className="md:w-3/5 p-8 flex flex-col flex-grow">
+                  <div className="mb-2">
+                    <h3 className="text-2xl font-bold text-slate-900 group-hover:text-blue-700 transition-colors">{leader.name}</h3>
+                    <div className="text-blue-600 font-semibold tracking-wide text-sm uppercase mt-1">{leader.title}</div>
+                  </div>
+                  
+                  <p className="text-slate-600 leading-relaxed text-sm mt-4 mb-6 flex-grow line-clamp-3">
                     {leader.bio}
                   </p>
-                </div>
-                
-                {/* Details Grid */}
-                <div className="space-y-4 pt-6 border-t border-slate-200">
-                  <div>
-                    <h4 className="font-semibold text-slate-800 text-sm mb-2">Core Expertise</h4>
-                    <ul className="space-y-1 text-sm text-slate-600">
-                      {leader.expertise.map((exp, i) => (
-                        <li key={i} className="flex items-start gap-2">
-                          <CheckCircle className="w-4 h-4 text-blue-500 mt-0.5 flex-shrink-0" />
-                          <span>{exp}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                  <div>
-                    <h4 className="font-semibold text-slate-800 text-sm mb-2">Education</h4>
-                    <p className="text-sm text-slate-600">{leader.education}</p>
-                  </div>
-                  <div>
-                    <h4 className="font-semibold text-slate-800 text-sm mb-2">Key Certifications</h4>
-                    <p className="text-sm text-slate-600">{leader.certifications}</p>
+                  
+                  {/* Footer Actions */}
+                  <div className="pt-6 border-t border-slate-100 flex items-center justify-between mt-auto">
+                    {leader.linkedin ? (
+                      <a 
+                        href={leader.linkedin} 
+                        target="_blank" 
+                        rel="noopener noreferrer" 
+                        className="w-10 h-10 rounded-full bg-slate-50 flex items-center justify-center text-slate-400 hover:bg-blue-50 hover:text-blue-600 transition-colors"
+                        aria-label={`${leader.name}'s LinkedIn profile`}
+                      >
+                        <Linkedin className="w-5 h-5" />
+                      </a>
+                    ) : (
+                      <div className="w-10 h-10"></div>
+                    )}
+                    <Link 
+                      to="/team" 
+                      className="inline-flex items-center gap-2 text-sm font-bold text-slate-900 hover:text-blue-600 transition-colors group/link"
+                    >
+                      Read full profile 
+                      <span className="group-hover/link:translate-x-1 transition-transform" aria-hidden="true">&rarr;</span>
+                    </Link>
                   </div>
                 </div>
               </div>
@@ -455,395 +565,59 @@ function Home() {
       </section>
 
       {/* Technology Stack */}
-      <section id="capabilities" className="py-20 px-4 bg-slate-900 text-white">
-        <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-16">
+      <section id="capabilities" className="py-20 bg-slate-900 text-white border-y border-slate-800 overflow-hidden">
+        <div className="max-w-7xl mx-auto px-4">
+          <div className="text-center mb-12">
             <h2 className="text-4xl font-bold mb-4">Our Technology Stack</h2>
             <p className="text-xl text-slate-300">
               We work with cutting-edge tools and platforms to deliver modern solutions
             </p>
           </div>
-          
-          <div className="grid md:grid-cols-4 gap-8">
-            <div className="bg-slate-800 rounded-xl p-6">
-              <h3 className="text-xl font-bold mb-4 text-blue-400">Cloud Platforms</h3>
-              <div className="space-y-2 text-slate-300">
-                <div>• Google Cloud Platform</div>
-                <div>• Amazon Web Services</div>
-                <div>• Microsoft Azure</div>
-                <div>• OpenShift / Kubernetes</div>
-                <div>• Multi-cloud Solutions</div>
+        </div>
+        
+        <div className="relative flex overflow-hidden group py-4">
+          <div className="animate-marquee flex gap-4 px-2">
+            {[
+              "Google Cloud Platform", "Amazon Web Services", "Microsoft Azure", "OpenShift", "Kubernetes", "Multi-cloud",
+              "Generative AI", "LLMs", "Machine Learning", "MLOps", "Computer Vision", "NLP & Analytics",
+              "Terraform", "Ansible", "GitHub", "GitLab", "ArgoCD", "Flux", "Docker", "Containerd", "CI/CD",
+              "Cloud Security", "DevSecOps", "IAM", "Compliance Tools", "Vulnerability Scanning",
+              "Google Cloud Platform", "Amazon Web Services", "Microsoft Azure", "OpenShift", "Kubernetes", "Multi-cloud",
+              "Generative AI", "LLMs", "Machine Learning", "MLOps", "Computer Vision", "NLP & Analytics",
+              "Terraform", "Ansible", "GitHub", "GitLab", "ArgoCD", "Flux", "Docker", "Containerd", "CI/CD",
+              "Cloud Security", "DevSecOps", "IAM", "Compliance Tools", "Vulnerability Scanning"
+            ].map((tech, i) => (
+              <div 
+                key={i} 
+                className="px-6 py-3 bg-slate-800/80 backdrop-blur-sm rounded-xl text-slate-300 font-semibold border border-slate-700 whitespace-nowrap hover:bg-slate-700 hover:text-white hover:scale-105 transition-all cursor-default shadow-lg flex items-center"
+              >
+                {tech}
               </div>
-            </div>
-            
-            <div className="bg-slate-800 rounded-xl p-6">
-              <h3 className="text-xl font-bold mb-4 text-cyan-400">AI & Data</h3>
-              <div className="space-y-2 text-slate-300">
-                <div>• Generative AI & LLMs</div>
-                <div>• Machine Learning</div>
-                <div>• MLOps Platforms</div>
-                <div>• Computer Vision</div>
-                <div>• NLP & Analytics</div>
-              </div>
-            </div>
-            
-            <div className="bg-slate-800 rounded-xl p-6">
-              <h3 className="text-xl font-bold mb-4 text-purple-400">DevOps Tools</h3>
-              <div className="space-y-2 text-slate-300">
-                <div>• Terraform & Ansible</div>
-                <div>• GitHub / GitLab</div>
-                <div>• ArgoCD / Flux</div>
-                <div>• Docker & Containerd</div>
-                <div>• CI/CD Pipelines</div>
-              </div>
-            </div>
-            
-            <div className="bg-slate-800 rounded-xl p-6">
-              <h3 className="text-xl font-bold mb-4 text-green-400">Security</h3>
-              <div className="space-y-2 text-slate-300">
-                <div>• Cloud Security</div>
-                <div>• DevSecOps</div>
-                <div>• IAM & Access Control</div>
-                <div>• Compliance Tools</div>
-                <div>• Vulnerability Scanning</div>
-              </div>
-            </div>
+            ))}
           </div>
-
-          {/* Client Sectors */}
-          <div className="mt-20">
-            <h3 className="text-2xl font-bold mb-8 text-center">Industries We Serve</h3>
-            <div className="grid md:grid-cols-4 gap-6">
-              {clients.map((client, idx) => (
-                <div key={idx} className="bg-slate-800 rounded-lg p-6 text-center">
-                  <div className="text-3xl mb-3">🏢</div>
-                  <div className="font-semibold text-white mb-1">{client.name}</div>
-                  <div className="text-sm text-slate-400">{client.sector}</div>
-                </div>
-              ))}
-            </div>
-          </div>
+          {/* Gradient fading edges */}
+          <div className="absolute inset-y-0 left-0 w-32 bg-gradient-to-r from-slate-900 to-transparent z-10 pointer-events-none"></div>
+          <div className="absolute inset-y-0 right-0 w-32 bg-gradient-to-l from-slate-900 to-transparent z-10 pointer-events-none"></div>
         </div>
       </section>
 
-      {/* About Section */}
-      <section id="about" className="py-20 px-4">
-        <div className="max-w-5xl mx-auto">
-          <div className="bg-white rounded-2xl shadow-xl p-12">
-            <div className="flex items-start gap-4 mb-6">
-              <Building className="w-8 h-8 text-blue-600 flex-shrink-0" />
-              <div>
-                <h2 className="text-3xl font-bold text-slate-900 mb-4">About Cirronyx</h2>
-                <p className="text-lg text-slate-600 leading-relaxed mb-6">
-                  Cirronyx is a technology consulting firm specializing in enterprise cloud infrastructure, 
-                  artificial intelligence, and modern software delivery practices. We partner with organizations 
-                  to transform their technology landscape and accelerate digital innovation.
-                </p>
-                <p className="text-lg text-slate-600 leading-relaxed mb-6">
-                  Our team brings deep expertise from leading technology companies and successful delivery 
-                  across multiple industries. We combine strategic thinking with hands-on technical implementation 
-                  to deliver solutions that drive measurable business outcomes.
-                </p>
-              </div>
-            </div>
-            
-            <div className="grid md:grid-cols-3 gap-6 pt-6 border-t border-slate-200">
-              <div>
-                <h4 className="font-semibold text-slate-800 mb-2">Our Approach</h4>
-                <p className="text-sm text-slate-600">
-                  We start by understanding your business goals, then architect solutions that align 
-                  technology with strategy. Every engagement includes knowledge transfer to empower your teams.
-                </p>
-              </div>
-              <div>
-                <h4 className="font-semibold text-slate-800 mb-2">Global Delivery</h4>
-                <p className="text-sm text-slate-600">
-                  With experience across North America and Europe, we understand the complexities of 
-                  international deployments and regulatory requirements.
-                </p>
-              </div>
-              <div>
-                <h4 className="font-semibold text-slate-800 mb-2">Continuous Innovation</h4>
-                <p className="text-sm text-slate-600">
-                  We stay at the forefront of technology trends, continuously evaluating emerging tools 
-                  and practices to bring you the most effective solutions.
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Engagement Model */}
-      <section id="engagement" className="py-20 px-4 bg-white">
+      {/* Industries We Serve */}
+      <section className="py-20 px-4 bg-slate-900 text-white">
         <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-slate-900 mb-4">Our Engagement Model</h2>
-            <p className="text-xl text-slate-600">
-              A proven methodology for delivering enterprise AI and cloud transformations
-            </p>
-          </div>
-
-          <div className="max-w-5xl mx-auto">
-            {/* Core Principles */}
-            <div className="mb-16">
-              <h3 className="text-2xl font-bold text-slate-900 mb-8 text-center">Core Engagement Principles</h3>
-              <div className="grid md:grid-cols-2 gap-6">
-                <div className="bg-gradient-to-br from-blue-50 to-white border border-blue-200 rounded-xl p-6">
-                  <div className="flex items-start gap-3 mb-3">
-                    <Target className="w-6 h-6 text-blue-600 flex-shrink-0 mt-1" />
-                    <div>
-                      <h4 className="font-bold text-slate-900 mb-2">Clear Business Need</h4>
-                      <p className="text-slate-600 text-sm">
-                        Every project must solve a real, recognized pain point. We avoid "AI for AI's sake" 
-                        and focus on measurable business outcomes from day one.
-                      </p>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="bg-gradient-to-br from-green-50 to-white border border-green-200 rounded-xl p-6">
-                  <div className="flex items-start gap-3 mb-3">
-                    <TrendingUp className="w-6 h-6 text-green-600 flex-shrink-0 mt-1" />
-                    <div>
-                      <h4 className="font-bold text-slate-900 mb-2">Measurable ROI</h4>
-                      <p className="text-slate-600 text-sm">
-                        Success is defined upfront with concrete metrics: cost reduction percentages, 
-                        time savings, accuracy improvements, or revenue impact.
-                      </p>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="bg-gradient-to-br from-purple-50 to-white border border-purple-200 rounded-xl p-6">
-                  <div className="flex items-start gap-3 mb-3">
-                    <Zap className="w-6 h-6 text-purple-600 flex-shrink-0 mt-1" />
-                    <div>
-                      <h4 className="font-bold text-slate-900 mb-2">Contained Scope</h4>
-                      <p className="text-slate-600 text-sm">
-                        We start with focused pilots that don't require integrating with dozens of legacy 
-                        systems, proving value before scaling enterprise-wide.
-                      </p>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="bg-gradient-to-br from-cyan-50 to-white border border-cyan-200 rounded-xl p-6">
-                  <div className="flex items-start gap-3 mb-3">
-                    <Shield className="w-6 h-6 text-cyan-600 flex-shrink-0 mt-1" />
-                    <div>
-                      <h4 className="font-bold text-slate-900 mb-2">Data Governance First</h4>
-                      <p className="text-slate-600 text-sm">
-                        All data must be accessible, of reasonable quality, and compliant with security 
-                        and regulatory requirements before project initiation.
-                      </p>
-                    </div>
-                  </div>
-                </div>
+          <h3 className="text-3xl font-bold mb-12 text-center">Industries We Serve</h3>
+          <div className="grid md:grid-cols-4 gap-6">
+            {clients.map((client, idx) => (
+              <div key={idx} className="bg-slate-800 rounded-2xl p-8 text-center border border-slate-700 hover:border-slate-500 hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
+                <div className="text-4xl mb-4">🏢</div>
+                <div className="font-semibold text-lg text-white mb-2">{client.name}</div>
+                <div className="text-sm text-slate-400">{client.sector}</div>
               </div>
-            </div>
-
-            {/* Success Criteria */}
-            <div className="bg-slate-900 text-white rounded-2xl p-10 mb-16">
-              <h3 className="text-2xl font-bold mb-6">Multi-Dimensional Success Criteria</h3>
-              <p className="text-slate-300 mb-6">
-                We define success across multiple dimensions, not just technical delivery:
-              </p>
-              <div className="grid md:grid-cols-2 gap-6">
-                <div>
-                  <h4 className="font-semibold text-blue-400 mb-3">Technical Metrics</h4>
-                  <ul className="space-y-2 text-sm text-slate-300">
-                    <li>• Model performance (accuracy, latency, F1 score)</li>
-                    <li>• Operational stability (uptime, error rates)</li>
-                    <li>• System scalability and cost to operate</li>
-                  </ul>
-                </div>
-                <div>
-                  <h4 className="font-semibold text-green-400 mb-3">Business Impact</h4>
-                  <ul className="space-y-2 text-sm text-slate-300">
-                    <li>• Business KPIs (cost saved, revenue generated)</li>
-                    <li>• User adoption rates and satisfaction</li>
-                    <li>• Qualitative feedback from stakeholders</li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-
-            {/* Phased Approach */}
-            <div>
-              <h3 className="text-2xl font-bold text-slate-900 mb-8 text-center">Phased Implementation Approach</h3>
-              <div className="space-y-6">
-                <div className="flex gap-4">
-                  <div className="flex-shrink-0 w-12 h-12 bg-blue-600 text-white rounded-full flex items-center justify-center font-bold">
-                    1
-                  </div>
-                  <div className="flex-1">
-                    <h4 className="font-bold text-slate-900 mb-2">Discovery & Foundation (Months 1-4)</h4>
-                    <p className="text-slate-600 mb-3">
-                      Build core infrastructure, establish security protocols, and select high-impact pilot 
-                      project with clear ROI potential. Set up governance frameworks and success metrics.
-                    </p>
-                    <div className="text-sm text-slate-500">
-                      Deliverables: Infrastructure setup, pilot selection, success criteria definition
-                    </div>
-                  </div>
-                </div>
-
-                <div className="flex gap-4">
-                  <div className="flex-shrink-0 w-12 h-12 bg-cyan-600 text-white rounded-full flex items-center justify-center font-bold">
-                    2
-                  </div>
-                  <div className="flex-1">
-                    <h4 className="font-bold text-slate-900 mb-2">Pilot Development & Validation (Months 5-9)</h4>
-                    <p className="text-slate-600 mb-3">
-                      Develop and deploy pilot solution with dedicated squad. Gather user feedback, measure 
-                      against defined KPIs, and iterate based on real-world usage patterns.
-                    </p>
-                    <div className="text-sm text-slate-500">
-                      Deliverables: Working pilot, user feedback, ROI validation
-                    </div>
-                  </div>
-                </div>
-
-                <div className="flex gap-4">
-                  <div className="flex-shrink-0 w-12 h-12 bg-purple-600 text-white rounded-full flex items-center justify-center font-bold">
-                    3
-                  </div>
-                  <div className="flex-1">
-                    <h4 className="font-bold text-slate-900 mb-2">Scaling & Enterprise Rollout (Months 10-18)</h4>
-                    <p className="text-slate-600 mb-3">
-                      Scale proven solutions enterprise-wide, enhance with additional capabilities, and 
-                      establish centers of excellence for ongoing innovation and support.
-                    </p>
-                    <div className="text-sm text-slate-500">
-                      Deliverables: Enterprise deployment, team training, operational handoff
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* Enterprise Integration */}
-            <div className="mt-16 bg-blue-50 rounded-2xl p-8">
-              <h3 className="text-xl font-bold text-slate-900 mb-4">Enterprise Architecture Integration</h3>
-              <p className="text-slate-600 mb-4">
-                We specialize in integrating AI systems with existing enterprise infrastructure through proven patterns:
-              </p>
-              <div className="grid md:grid-cols-3 gap-4">
-                <div className="bg-white rounded-lg p-4">
-                  <h4 className="font-semibold text-slate-900 mb-2 text-sm">AI-Powered API Facade</h4>
-                  <p className="text-xs text-slate-600">
-                    Intelligent wrappers around legacy systems, translating natural language to complex API calls
-                  </p>
-                </div>
-                <div className="bg-white rounded-lg p-4">
-                  <h4 className="font-semibold text-slate-900 mb-2 text-sm">Event-Driven Agents</h4>
-                  <p className="text-xs text-slate-600">
-                    Asynchronous processing with message queues for scalable, resilient multi-step workflows
-                  </p>
-                </div>
-                <div className="bg-white rounded-lg p-4">
-                  <h4 className="font-semibold text-slate-900 mb-2 text-sm">RAG Knowledge Hubs</h4>
-                  <p className="text-xs text-slate-600">
-                    Centralized vector databases serving multiple applications with tailored contexts
-                  </p>
-                </div>
-              </div>
-            </div>
+            ))}
           </div>
         </div>
       </section>
 
-      {/* Thought Leadership */}
-      <section id="thought-leadership" className="py-20 px-4 bg-slate-50">
-        <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-slate-900 mb-4">Thought Leadership</h2>
-            <p className="text-xl text-slate-600">
-              Sharing insights at industry conferences and events
-            </p>
-          </div>
 
-          <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
-            <div className="bg-white rounded-xl p-8 shadow-md border border-slate-200">
-              <div className="flex items-start gap-4 mb-4">
-                <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center flex-shrink-0">
-                  <GraduationCap className="w-6 h-6 text-blue-600" />
-                </div>
-                <div>
-                  <h3 className="font-bold text-slate-900 mb-2">Conference Speaking & Seminars</h3>
-                  <p className="text-slate-600 text-sm mb-4">
-                    Our team regularly participates in and leads technical discussions on DevOps, 
-                    Security, Big Data, and AI at industry conferences and corporate events.
-                  </p>
-                </div>
-              </div>
-              <div className="space-y-3">
-                <div className="flex items-center gap-2 text-sm text-slate-600">
-                  <CheckCircle className="w-4 h-4 text-green-500" />
-                  <span>DevOps transformation strategies</span>
-                </div>
-                <div className="flex items-center gap-2 text-sm text-slate-600">
-                  <CheckCircle className="w-4 h-4 text-green-500" />
-                  <span>Cloud security best practices</span>
-                </div>
-                <div className="flex items-center gap-2 text-sm text-slate-600">
-                  <CheckCircle className="w-4 h-4 text-green-500" />
-                  <span>Enterprise AI implementation</span>
-                </div>
-                <div className="flex items-center gap-2 text-sm text-slate-600">
-                  <CheckCircle className="w-4 h-4 text-green-500" />
-                  <span>Big data architecture patterns</span>
-                </div>
-              </div>
-            </div>
-
-            <div className="bg-white rounded-xl p-8 shadow-md border border-slate-200">
-              <div className="flex items-start gap-4 mb-4">
-                <div className="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center flex-shrink-0">
-                  <Globe className="w-6 h-6 text-purple-600" />
-                </div>
-                <div>
-                  <h3 className="font-bold text-slate-900 mb-2">Training & Educational Content</h3>
-                  <p className="text-slate-600 text-sm mb-4">
-                    Delivering training content to thousands of professionals worldwide through 
-                    partnerships with leading educational platforms.
-                  </p>
-                </div>
-              </div>
-              <div className="space-y-4">
-                <a 
-                  href="https://www.riseupp.com/instructor/dr-fortem-mbah/6679" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="block bg-slate-50 rounded-lg p-3 hover:bg-slate-100 transition"
-                >
-                  <div className="text-sm font-semibold text-slate-900 mb-1">IoT Security Specialization</div>
-                  <div className="text-xs text-slate-600">Coursera - 1,000+ students worldwide</div>
-                </a>
-                <a 
-                  href="https://vnclagoon.com/vnc-google-cloud-doit-webinar-2021-available-on-demand-now/" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="block bg-slate-50 rounded-lg p-3 hover:bg-slate-100 transition"
-                >
-                  <div className="text-sm font-semibold text-slate-900 mb-1">Google Cloud Webinar</div>
-                  <div className="text-xs text-slate-600">DoiT International Partnership Event</div>
-                </a>
-              </div>
-            </div>
-          </div>
-
-          <div className="mt-12 text-center">
-            <p className="text-slate-600 mb-6">
-              Interested in having our team speak at your event or deliver custom training?
-            </p>
-            <a href="#contact" className="inline-block bg-blue-600 text-white px-7 py-2.5 rounded-full font-medium hover:bg-blue-700 hover:shadow-lg transition">
-              Get in Touch
-            </a>
-          </div>
-        </div>
-      </section>
 
       {/* Contact Section */}
       <section id="contact" className="py-20 px-4 bg-blue-600 text-white">
@@ -896,7 +670,17 @@ function Home() {
             </a>
           </div>
         </div>
-      </section>
+       </section>
+
+      {/* Service Detail Modal */}
+      {selectedService && (
+        <ServiceModal
+          service={selectedService}
+          iconNode={SelectedIcon ? <SelectedIcon className="w-6 h-6 text-cyan-400" /> : null}
+          color={serviceColors[selectedServiceIndex % serviceColors.length]}
+          onClose={() => setSelectedServiceIndex(null)}
+        />
+      )}
     </main>
   );
 }

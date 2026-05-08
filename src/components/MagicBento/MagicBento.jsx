@@ -1,5 +1,6 @@
 import React, { useRef, useEffect, useCallback, useState } from 'react';
 import { gsap } from 'gsap';
+import { ArrowRight } from 'lucide-react';
 import './MagicBento.css';
 
 const DEFAULT_PARTICLE_COUNT = 12;
@@ -443,7 +444,8 @@ const MagicBento = ({
   enableTilt = false,
   glowColor = DEFAULT_GLOW_COLOR,
   clickEffect = true,
-  enableMagnetism = true
+  enableMagnetism = true,
+  onCardClick = null
 }) => {
   const gridRef = useRef(null);
   const isMobile = useMobileDetection();
@@ -495,6 +497,14 @@ const MagicBento = ({
                 <div className="magic-bento-card__content">
                   <h2 className="magic-bento-card__title text-white">{card.title}</h2>
                   <p className="magic-bento-card__description text-slate-300">{card.description}</p>
+                  {onCardClick && (
+                    <button
+                      className="magic-bento-card__readmore"
+                      onClick={(e) => { e.stopPropagation(); onCardClick(index); }}
+                    >
+                      Read More <ArrowRight className="magic-bento-card__readmore-arrow" size={16} />
+                    </button>
+                  )}
                 </div>
               </ParticleCard>
             );
@@ -623,6 +633,14 @@ const MagicBento = ({
               <div className="magic-bento-card__content">
                 <h2 className="magic-bento-card__title text-white">{card.title}</h2>
                 <p className="magic-bento-card__description text-slate-300">{card.description}</p>
+                {onCardClick && (
+                  <button
+                    className="magic-bento-card__readmore"
+                    onClick={(e) => { e.stopPropagation(); onCardClick(index); }}
+                  >
+                    Read More <ArrowRight className="magic-bento-card__readmore-arrow" size={16} />
+                  </button>
+                )}
               </div>
             </div>
           );
