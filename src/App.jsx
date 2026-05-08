@@ -10,6 +10,7 @@ import Contact from './pages/Contact';
 import Blog from './pages/Blog';
 import HowWeWork from './pages/HowWeWork';
 import SEO from './components/SEO/SEO';
+import Footer from './components/Footer/Footer';
 
 // Scroll to top on route change
 function ScrollToTop() {
@@ -120,43 +121,7 @@ function App() {
         </Routes>
 
         {/* Footer */}
-        <footer className="bg-slate-900 text-slate-400 py-12 px-4">
-          <div className="max-w-7xl mx-auto">
-            <div className="grid md:grid-cols-4 gap-8 mb-8">
-              <div className="md:col-span-2">
-                <h3 className="text-2xl font-bold text-white mb-2">Cirronyx</h3>
-                <p className="text-slate-400 mb-4">
-                  Enterprise Cloud, AI & DevOps Consulting
-                </p>
-                <p className="text-sm text-slate-500">
-                  Transforming businesses through innovative technology solutions.
-                </p>
-              </div>
-              <div>
-                <h4 className="font-semibold text-white mb-3">Services</h4>
-                <ul className="space-y-2 text-sm">
-                  <li><Link to="/services" className="hover:text-white transition">Cloud Migration</Link></li>
-                  <li><Link to="/services" className="hover:text-white transition">AI/ML Solutions</Link></li>
-                  <li><Link to="/services" className="hover:text-white transition">DevOps</Link></li>
-                  <li><Link to="/services" className="hover:text-white transition">Cybersecurity</Link></li>
-                </ul>
-              </div>
-              <div>
-                <h4 className="font-semibold text-white mb-3">Company</h4>
-                <ul className="space-y-2 text-sm">
-                  <li><Link to="/about" className="hover:text-white transition">About Us</Link></li>
-                  <li><Link to="/team" className="hover:text-white transition">Team</Link></li>
-                  <li><Link to="/careers" className="hover:text-white transition">Careers</Link></li>
-                  <li><Link to="/blog" className="hover:text-white transition">Blog</Link></li>
-                  <li><Link to="/contact" className="hover:text-white transition">Contact</Link></li>
-                </ul>
-              </div>
-            </div>
-            <div className="border-t border-slate-800 pt-8 text-center text-sm">
-              <p>© 2026 Cirronyx. All rights reserved.</p>
-            </div>
-          </div>
-        </footer>
+        <Footer />
       </div>
     </Router>
   );
