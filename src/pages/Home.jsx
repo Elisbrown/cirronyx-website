@@ -11,7 +11,6 @@ import SEO from '../components/SEO/SEO';
 // Import data
 import servicesData from '../data/services.json';
 import projectsData from '../data/projects.json';
-import testimonialsData from '../data/testimonials.json';
 import teamData from '../data/team.json';
 
 // Icon mapping
