@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { BrowserRouter as Router, Routes, Route, useLocation, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import CardNav from './components/CardNav/CardNav';
 import Home from './pages/Home';
 import Careers from './pages/Careers';
@@ -8,6 +8,7 @@ import Team from './pages/Team';
 import Services from './pages/Services';
 import Contact from './pages/Contact';
 import Blog from './pages/Blog';
+import BlogPost from './pages/BlogPost';
 import HowWeWork from './pages/HowWeWork';
 import SEO from './components/SEO/SEO';
 import Footer from './components/Footer/Footer';
@@ -117,6 +118,7 @@ function App() {
           <Route path="/services" element={<Services />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/blog" element={<Blog />} />
+          <Route path="/blog/:id" element={<BlogPost />} />
           <Route path="/how-we-work" element={<HowWeWork />} />
         </Routes>
 

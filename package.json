@@ -4,6 +4,7 @@
   "description": "Cirronyx Consulting - Enterprise Cloud, AI & DevOps Solutions",
   "private": true,
   "dependencies": {
+    "@tailwindcss/typography": "^0.5.19",
     "gsap": "^3.15.0",
     "lenis": "^1.3.23",
     "lucide-react": "^0.294.0",

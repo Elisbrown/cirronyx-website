@@ -3,7 +3,7 @@ import { Briefcase, MapPin, Clock, ChevronDown, ChevronUp, Send, CheckCircle } f
 
 import SEO from '../components/SEO/SEO';
 
-const JobListing = ({ title, location, type, description, requirements }) => {
+const JobListing = ({ title, department, location, type, salary, description, requirements }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
@@ -13,11 +13,21 @@ const JobListing = ({ title, location, type, description, requirements }) => {
         onClick={() => setIsOpen(!isOpen)}
       >
         <div className="flex-1">
-          <div className="flex items-center gap-3 mb-2">
+          <div className="flex flex-wrap items-center gap-3 mb-2">
             <span className="bg-blue-100 text-blue-700 px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider">
               {type}
             </span>
-            <div className="flex items-center text-slate-500 text-sm">
+            {department && (
+              <span className="bg-slate-100 text-slate-700 px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider">
+                {department}
+              </span>
+            )}
+            {salary && (
+              <span className="bg-green-100 text-green-700 px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider">
+                {salary}
+              </span>
+            )}
+            <div className="flex items-center text-slate-500 text-sm ml-2">
               <MapPin className="w-4 h-4 mr-1" />
               {location}
             </div>
@@ -64,10 +74,13 @@ const JobListing = ({ title, location, type, description, requirements }) => {
 
 function Careers() {
   const jobs = [
+    /*
     {
       title: "Senior Cloud Architect",
+      department: "Cloud Engineering",
       location: "Remote / Global",
       type: "Full-time",
+      salary: "$150,000 - $190,000",
       description: "We are looking for a Senior Cloud Architect to lead the design and implementation of complex cloud infrastructures for our enterprise clients. You will work closely with stakeholders to understand business requirements and translate them into scalable, secure, and cost-effective cloud solutions.",
       requirements: [
         "10+ years of experience in IT infrastructure and cloud architecture",
@@ -76,20 +89,8 @@ function Careers() {
         "Experience with Kubernetes and container orchestration",
         "Strong communication skills and ability to lead technical teams"
       ]
-    },
-    {
-      title: "AI/ML Solutions Engineer",
-      location: "Hybrid / New York",
-      type: "Full-time",
-      description: "Join our AI innovation lab as an AI/ML Solutions Engineer. You will be responsible for building and deploying production-grade machine learning models and generative AI solutions. You'll bridge the gap between data science and software engineering to deliver real business value.",
-      requirements: [
-        "5+ years of experience in software engineering and machine learning",
-        "Proficiency in Python and ML frameworks (PyTorch, TensorFlow)",
-        "Experience with LLMs and Generative AI patterns (RAG, Fine-tuning)",
-        "Knowledge of MLOps practices and tools (Kubeflow, MLflow)",
-        "Passionate about staying at the forefront of AI technology"
-      ]
     }
+    */
   ];
 
   // Schema for job postings
@@ -188,9 +189,22 @@ function Careers() {
         </div>
         
         <div className="space-y-6">
-          {jobs.map((job, idx) => (
-            <JobListing key={idx} {...job} />
-          ))}
+          {jobs.length > 0 ? (
+            jobs.map((job, idx) => (
+              <JobListing key={idx} {...job} />
+            ))
+          ) : (
+            <div className="text-center py-12 bg-white rounded-2xl border border-slate-200 shadow-sm">
+              <div className="w-16 h-16 bg-slate-100 rounded-full flex items-center justify-center mx-auto mb-4 text-slate-400">
+                <Briefcase className="w-8 h-8" />
+              </div>
+              <h3 className="text-2xl font-bold text-slate-900 mb-2">No open positions at the moment</h3>
+              <p className="text-slate-600 max-w-md mx-auto">
+                We're not actively hiring for specific roles right now, but we are always looking for great talent. 
+                Please feel free to submit a general application below!
+              </p>
+            </div>
+          )}
         </div>
         
         <div className="mt-16 bg-blue-900 rounded-3xl p-10 text-white text-center shadow-2xl relative overflow-hidden">

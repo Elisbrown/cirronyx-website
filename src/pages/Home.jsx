@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Cloud, Brain, Code, Shield, GraduationCap, TrendingUp, CheckCircle, Award, Globe, Mail, Users, Building, Zap, Target, Linkedin } from 'lucide-react';
+import { Cloud, Brain, Code, Shield, GraduationCap, TrendingUp, CheckCircle, Award, Globe, Mail, Users, Building, Zap, Target, Linkedin, Landmark, HeartPulse, Monitor, Factory, ShoppingCart, Wifi, Gamepad2, ChevronDown, ChevronUp } from 'lucide-react';
 import DotGrid from '../components/DotGrid/DotGrid';
 import BorderGlow from '../components/BorderGlow/BorderGlow';
 import CardSwap, { Card } from '../components/CardSwap/CardSwap';
@@ -25,6 +25,7 @@ const iconMap = {
 
 function Home() {
   const [selectedServiceIndex, setSelectedServiceIndex] = useState(null);
+  const [showMoreTech, setShowMoreTech] = useState(false);
   const selectedService = selectedServiceIndex !== null ? servicesData[selectedServiceIndex] : null;
   const SelectedIcon = selectedService ? iconMap[selectedService.icon] : null;
   const serviceColors = ['#004058', '#006890', '#2E94AE', '#002D3E', '#004058', '#006890'];
@@ -52,11 +53,35 @@ function Home() {
     { number: "24/7", label: "Support Available" }
   ];
 
-  const clients = [
-    { name: "Fortune 500 Enterprises", sector: "Multiple Industries" },
-    { name: "Global Technology Leaders", sector: "Cloud & Software" },
-    { name: "Financial Services", sector: "Banking & Insurance" },
-    { name: "Automotive Industry", sector: "Manufacturing & Digital" }
+  const industries = [
+    { name: "Financial Services", sector: "Banking & Insurance", icon: Landmark, color: "text-blue-400", bg: "bg-blue-400/10", border: "border-blue-400/20", hoverBorder: "hover:border-blue-400/50" },
+    { name: "Healthcare & Life Sciences", sector: "Digital Health", icon: HeartPulse, color: "text-rose-400", bg: "bg-rose-400/10", border: "border-rose-400/20", hoverBorder: "hover:border-rose-400/50" },
+    { name: "Technology & Software", sector: "SaaS & Cloud", icon: Monitor, color: "text-cyan-400", bg: "bg-cyan-400/10", border: "border-cyan-400/20", hoverBorder: "hover:border-cyan-400/50" },
+    { name: "Automotive & Manufacturing", sector: "Industry 4.0", icon: Factory, color: "text-orange-400", bg: "bg-orange-400/10", border: "border-orange-400/20", hoverBorder: "hover:border-orange-400/50" },
+    { name: "Retail & E-Commerce", sector: "Digital Storefronts", icon: ShoppingCart, color: "text-emerald-400", bg: "bg-emerald-400/10", border: "border-emerald-400/20", hoverBorder: "hover:border-emerald-400/50" },
+    { name: "Telecommunications", sector: "Network & Infrastructure", icon: Wifi, color: "text-indigo-400", bg: "bg-indigo-400/10", border: "border-indigo-400/20", hoverBorder: "hover:border-indigo-400/50" },
+    { name: "Energy & Utilities", sector: "Smart Grids", icon: Zap, color: "text-yellow-400", bg: "bg-yellow-400/10", border: "border-yellow-400/20", hoverBorder: "hover:border-yellow-400/50" },
+    { name: "Media & Entertainment", sector: "Streaming & Gaming", icon: Gamepad2, color: "text-purple-400", bg: "bg-purple-400/10", border: "border-purple-400/20", hoverBorder: "hover:border-purple-400/50" }
+  ];
+
+  const techLogos = [
+    { name: "Google Cloud", src: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/googlecloud/googlecloud-original.svg" },
+    { name: "AWS", src: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/amazonwebservices/amazonwebservices-original-wordmark.svg" },
+    { name: "Microsoft Azure", src: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/azure/azure-original-wordmark.svg" },
+    { name: "Kubernetes", src: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/kubernetes/kubernetes-plain-wordmark.svg" },
+    { name: "Docker", src: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/docker/docker-original-wordmark.svg" },
+    { name: "GitHub", src: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/github/github-original-wordmark.svg" },
+    { name: "GitLab", src: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/gitlab/gitlab-original-wordmark.svg" },
+    { name: "Terraform", src: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/terraform/terraform-original-wordmark.svg" },
+    { name: "Ansible", src: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/ansible/ansible-original-wordmark.svg" },
+    { name: "OpenShift", src: "https://cdn.simpleicons.org/redhatopenshift/ffffff" },
+    { name: "ArgoCD", src: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/argocd/argocd-original-wordmark.svg" }
+  ];
+
+  const otherTech = [
+    "Multi-cloud", "Generative AI", "LLMs", "Machine Learning", "MLOps", "Computer Vision", 
+    "NLP & Analytics", "Flux", "Containerd", "CI/CD", "Cloud Security", "DevSecOps", "IAM", 
+    "Compliance Tools", "Vulnerability Scanning"
   ];
 
   return (
@@ -564,54 +589,93 @@ function Home() {
       </section>
 
       {/* Technology Stack */}
-      <section id="capabilities" className="py-20 bg-slate-900 text-white border-y border-slate-800 overflow-hidden">
+      <section id="capabilities" className="py-20 bg-[#0a0f18] text-white border-y border-slate-800 overflow-hidden">
         <div className="max-w-7xl mx-auto px-4">
-          <div className="text-center mb-12">
+          <div className="text-center mb-16">
             <h2 className="text-4xl font-bold mb-4">Our Technology Stack</h2>
-            <p className="text-xl text-slate-300">
+            <p className="text-xl text-slate-400">
               We work with cutting-edge tools and platforms to deliver modern solutions
             </p>
           </div>
         </div>
         
-        <div className="relative flex overflow-hidden group py-4">
-          <div className="animate-marquee flex gap-4 px-2">
-            {[
-              "Google Cloud Platform", "Amazon Web Services", "Microsoft Azure", "OpenShift", "Kubernetes", "Multi-cloud",
-              "Generative AI", "LLMs", "Machine Learning", "MLOps", "Computer Vision", "NLP & Analytics",
-              "Terraform", "Ansible", "GitHub", "GitLab", "ArgoCD", "Flux", "Docker", "Containerd", "CI/CD",
-              "Cloud Security", "DevSecOps", "IAM", "Compliance Tools", "Vulnerability Scanning",
-              "Google Cloud Platform", "Amazon Web Services", "Microsoft Azure", "OpenShift", "Kubernetes", "Multi-cloud",
-              "Generative AI", "LLMs", "Machine Learning", "MLOps", "Computer Vision", "NLP & Analytics",
-              "Terraform", "Ansible", "GitHub", "GitLab", "ArgoCD", "Flux", "Docker", "Containerd", "CI/CD",
-              "Cloud Security", "DevSecOps", "IAM", "Compliance Tools", "Vulnerability Scanning"
-            ].map((tech, i) => (
+        <div className="relative flex overflow-hidden group py-8">
+          <div className="animate-marquee flex gap-16 px-8 items-center min-w-max hover:[animation-play-state:paused]">
+            {[...techLogos, ...techLogos].map((tech, i) => (
               <div 
                 key={i} 
-                className="px-6 py-3 bg-slate-800/80 backdrop-blur-sm rounded-xl text-slate-300 font-semibold border border-slate-700 whitespace-nowrap hover:bg-slate-700 hover:text-white hover:scale-105 transition-all cursor-default shadow-lg flex items-center"
+                className="flex-shrink-0"
               >
-                {tech}
+                {tech.name === "OpenShift" ? (
+                  <div className="flex items-center gap-3 opacity-50 hover:opacity-100 transition-opacity duration-300">
+                    <img src={tech.src} alt={tech.name} className="h-10 object-contain" />
+                    <span className="text-2xl font-bold tracking-tight text-white font-sans" style={{fontFamily: 'Overpass, sans-serif'}}>OpenShift</span>
+                  </div>
+                ) : (
+                  <img 
+                    src={tech.src} 
+                    alt={tech.name} 
+                    className="h-10 md:h-12 object-contain opacity-50 hover:opacity-100 transition-opacity duration-300"
+                    style={{ filter: 'brightness(0) invert(1)' }}
+                    title={tech.name}
+                  />
+                )}
               </div>
             ))}
           </div>
           {/* Gradient fading edges */}
-          <div className="absolute inset-y-0 left-0 w-32 bg-gradient-to-r from-slate-900 to-transparent z-10 pointer-events-none"></div>
-          <div className="absolute inset-y-0 right-0 w-32 bg-gradient-to-l from-slate-900 to-transparent z-10 pointer-events-none"></div>
+          <div className="absolute inset-y-0 left-0 w-32 bg-gradient-to-r from-[#0a0f18] to-transparent z-10 pointer-events-none"></div>
+          <div className="absolute inset-y-0 right-0 w-32 bg-gradient-to-l from-[#0a0f18] to-transparent z-10 pointer-events-none"></div>
+        </div>
+
+        <div className="max-w-7xl mx-auto px-4 mt-12 text-center">
+          <button 
+            onClick={() => setShowMoreTech(!showMoreTech)}
+            className="inline-flex items-center gap-2 px-6 py-2.5 rounded-full border border-slate-700 text-slate-300 hover:bg-slate-800 hover:text-white transition-all"
+          >
+            {showMoreTech ? "Hide Additional Technologies" : "View All Technologies"}
+            {showMoreTech ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
+          </button>
+
+          {showMoreTech && (
+            <div className="mt-8 p-8 bg-slate-800/40 backdrop-blur-sm rounded-2xl border border-slate-700/50 animate-fade-in max-w-4xl mx-auto">
+              <div className="flex flex-wrap gap-3 justify-center">
+                {otherTech.map(tech => (
+                  <span key={tech} className="px-4 py-2 bg-slate-800/80 text-slate-300 rounded-lg text-sm border border-slate-700 font-medium">
+                    {tech}
+                  </span>
+                ))}
+              </div>
+            </div>
+          )}
         </div>
       </section>
 
       {/* Industries We Serve */}
-      <section className="py-20 px-4 bg-slate-900 text-white">
+      <section className="py-20 px-4 bg-slate-900 text-white border-b border-slate-800">
         <div className="max-w-7xl mx-auto">
-          <h3 className="text-3xl font-bold mb-12 text-center">Industries We Serve</h3>
-          <div className="grid md:grid-cols-4 gap-6">
-            {clients.map((client, idx) => (
-              <div key={idx} className="bg-slate-800 rounded-2xl p-8 text-center border border-slate-700 hover:border-slate-500 hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
-                <div className="text-4xl mb-4">🏢</div>
-                <div className="font-semibold text-lg text-white mb-2">{client.name}</div>
-                <div className="text-sm text-slate-400">{client.sector}</div>
-              </div>
-            ))}
+          <div className="text-center mb-16">
+            <h2 className="text-4xl font-bold mb-4">Industries We Serve</h2>
+            <p className="text-xl text-slate-400 max-w-2xl mx-auto">
+              Delivering specialized technology solutions across every major sector.
+            </p>
+          </div>
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {industries.map((industry, idx) => {
+              const Icon = industry.icon;
+              return (
+                <div key={idx} className={`relative group bg-slate-800/40 backdrop-blur-sm rounded-2xl p-8 border ${industry.border} ${industry.hoverBorder} hover:bg-slate-800/80 hover:-translate-y-1 transition-all duration-300 overflow-hidden`}>
+                  {/* Glowing background blob */}
+                  <div className={`absolute -right-8 -top-8 w-32 h-32 ${industry.bg} rounded-full blur-3xl group-hover:scale-150 transition-transform duration-500`}></div>
+                  
+                  <div className={`w-14 h-14 ${industry.bg} rounded-xl flex items-center justify-center mb-6 relative z-10 border border-white/5`}>
+                    <Icon className={`w-7 h-7 ${industry.color}`} />
+                  </div>
+                  <h3 className="font-bold text-xl text-white mb-2 relative z-10">{industry.name}</h3>
+                  <p className="text-slate-400 text-sm font-medium relative z-10">{industry.sector}</p>
+                </div>
+              );
+            })}
           </div>
         </div>
       </section>
@@ -619,57 +683,45 @@ function Home() {
 
 
       {/* Contact Section */}
-      <section id="contact" className="py-20 px-4 bg-blue-600 text-white">
-        <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-4xl font-bold mb-6">Let's Build Something Great Together</h2>
+      <section id="contact" className="py-24 px-4 bg-blue-600 text-white relative overflow-hidden">
+        {/* Subtle background glow */}
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-blue-500/50 rounded-full blur-3xl pointer-events-none"></div>
+        
+        <div className="max-w-4xl mx-auto text-center relative z-10">
+          <h2 className="text-4xl md:text-5xl font-bold mb-6">Let's Build Something Great Together</h2>
           <p className="text-xl text-blue-100 mb-12 max-w-2xl mx-auto">
             Ready to accelerate your digital transformation? Connect with our team to discuss your project.
           </p>
           
-          <div className="grid md:grid-cols-2 gap-6 mb-12">
-            <a href="mailto:info@cirronyx.com" className="bg-white/10 backdrop-blur-md rounded-xl p-6 hover:bg-white/20 transition">
-              <Mail className="w-8 h-8 mx-auto mb-3" />
-              <div className="font-semibold mb-1">Email Us</div>
-              <div className="text-sm text-blue-100">info@cirronyx.com</div>
-            </a>
-            <a 
-              href="https://calendar.app.google/5TfmhVHB2pd24i8B9"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="bg-white/10 backdrop-blur-md rounded-xl p-6 hover:bg-white/20 transition cursor-pointer"
-            >
-              <Globe className="w-8 h-8 mx-auto mb-3" />
-              <div className="font-semibold mb-1">Schedule a Call</div>
-              <div className="text-sm text-blue-100">Book a consultation</div>
-            </a>
-          </div>
-          
-          <div className="bg-white/10 backdrop-blur-md rounded-xl p-8 text-left">
-            <h3 className="text-2xl font-bold mb-4">Start Your Project</h3>
-            <p className="text-blue-100 mb-6">
+          <div className="bg-white/10 backdrop-blur-md rounded-3xl p-10 md:p-12 max-w-3xl mx-auto text-center border border-white/20 shadow-2xl">
+            <h3 className="text-3xl font-bold mb-4">Start Your Project</h3>
+            <p className="text-blue-100 mb-8 text-lg">
               We offer complimentary initial consultations for enterprise clients. Let's explore how we can 
               help you achieve your technology goals.
             </p>
-            <div className="grid md:grid-cols-3 gap-4 mb-6">
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-6 mb-10">
               <div className="flex items-center gap-2">
-                <CheckCircle className="w-5 h-5 flex-shrink-0" />
-                <span className="text-sm">Free consultation</span>
+                <CheckCircle className="w-5 h-5 flex-shrink-0 text-cyan-300" />
+                <span className="font-medium text-white">Free consultation</span>
               </div>
               <div className="flex items-center gap-2">
-                <CheckCircle className="w-5 h-5 flex-shrink-0" />
-                <span className="text-sm">No obligation</span>
+                <CheckCircle className="w-5 h-5 flex-shrink-0 text-cyan-300" />
+                <span className="font-medium text-white">No obligation</span>
               </div>
               <div className="flex items-center gap-2">
-                <CheckCircle className="w-5 h-5 flex-shrink-0" />
-                <span className="text-sm">Fast response</span>
+                <CheckCircle className="w-5 h-5 flex-shrink-0 text-cyan-300" />
+                <span className="font-medium text-white">Fast response</span>
               </div>
             </div>
-            <a href="mailto:info@cirronyx.com?subject=Project%20Inquiry" className="inline-block bg-white text-blue-600 border border-slate-200 px-7 py-2.5 rounded-full font-medium hover:shadow-lg transition">
+            <Link 
+              to="/contact" 
+              className="inline-flex items-center justify-center bg-white text-blue-700 px-10 py-4 rounded-full font-bold text-lg hover:shadow-xl hover:bg-blue-50 transition-all hover:-translate-y-1"
+            >
               Get in Touch
-            </a>
+            </Link>
           </div>
         </div>
-       </section>
+      </section>
 
       {/* Service Detail Modal */}
       {selectedService && (

@@ -9,7 +9,7 @@ function Team() {
     <div className="bg-slate-50 min-h-screen">
       <SEO
         title="Team"
-        description="Meet the leadership team at Cirronyx — certified professionals with deep expertise in cloud, AI, and DevOps."
+        description="Meet the leadership team at Cirronyx, certified professionals with deep expertise in cloud, AI, and DevOps."
         canonical="/team"
       />
 
